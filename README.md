@@ -1,4 +1,4 @@
-<h1 align="center" style="font-size:15vw">Sales Insights Using PowerBI</h1>
+<h1 align="center" style="font-size:20vw">Sales Insights Using PowerBI</h1>
 
 # About the project
 I wanted to work on a project that would take me through the entire workflow of a real-time
