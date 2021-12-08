@@ -99,8 +99,9 @@ many sources; Excel files and spreadsheets, CSV files, JSON Files,
   , SQL, etc. Today, we will be extracting our data from MySQL. 
   After collecting and importing the data from our desired
    database, we start with the data cleaning process.
+   
+![566f5789-e435-42f7-a2a0-70a96f07ffa9](https://user-images.githubusercontent.com/80768666/145198417-a68b1c74-c199-4125-bc72-36bdcf919d8c.jpg)
 
-**_insert get data screenshot_**
 
 ## The data 
 The database consists of the following fields:
@@ -132,8 +133,10 @@ The database consists of the following fields:
 All of this data can be accessed and viewed in the data section
 of PowerBI desktop. 
 
-**_screenshot of highlighted data section**
-**_screenshot of various fields on the right(highlight it) + add a full screenshot with table_**
+![2ad568ff-28fa-46a6-b275-6e3f2affe8df](https://user-images.githubusercontent.com/80768666/145198801-17b49cb4-aeff-45eb-9b9c-828a93d0fe8b.jpg)
+
+![3fdd7dd2-dc04-4487-be3d-53597b3dfba4](https://user-images.githubusercontent.com/80768666/145198853-bfaa9c34-a03a-4603-9af5-e3ad5fbd6360.jpg)
+
 
 ## Data Cleaning
 Before we jump to creating the main report, or anything related 
@@ -149,31 +152,35 @@ understand the data at hand thoroughly before proceeding.
 After connecting and importing the data, we now move on to
 the PowerBI Query Editor to perform the required changes. 
 
-**_picture of opening power query editor_**
+![83d92b4e-d273-41ee-ae82-6a31bc2b8864](https://user-images.githubusercontent.com/80768666/145198987-bc2484dc-17c2-40d2-b2b9-06d649fea1de.jpg)
+
 
 1. Markets table: As discussed earlier, the company associated with our project is based in India and is split across 3 regions.
 But, the data also shows a few transactions taking place in regions
 outside India such as New York and Paris.
 
-**_picture of before_**
+![6630f32d-e8d2-4776-85dc-6bd6742228cc](https://user-images.githubusercontent.com/80768666/145199025-7d1e5beb-d28c-4b5b-984a-044c05287db5.jpg)
+
 
 This wouldn't have been an issue but upon looking closely, it was observed that the number of
 products sold is way higher than what the corresponding revenue shows. This clearly indicates that these are garbage 
 values. Hence, we get rid of these from our data. We do this by 
 deselecting all the rows which consist of blank spaces.
- 
-**_pichture of deselcting_**
+
+ ![afe6594f-1671-4f85-997b-2aff68680b84](https://user-images.githubusercontent.com/80768666/145199058-b2a7030d-c931-4d5b-bbca-54e2231154b1.jpg)
 
 As you perform all these tasks, PowerBI keeps generating the 
 queries generated, where you can make the rest of your changes depending on 
 your needs.
 
-**_final new picture + picture of the query generated_**
+![de9658cf-b831-48aa-9d5a-d280e378c8b0](https://user-images.githubusercontent.com/80768666/145199114-e7d618a9-23e1-49d3-9200-dae8d694d318.jpg)
+
 
 *Every change or action made is recorded and displayed in 
 the applied steps section*
 
-**_picture of applied steps section_**
+![de321e2f-a20d-4977-807c-cfbb11553af5](https://user-images.githubusercontent.com/80768666/145199166-7cf6ab84-3247-4b44-a754-4d5c7439c34b.jpg)
+
 
 #### Query generated:
     Table.SelectRows(sales_markets, each([zone] <> "))
@@ -183,13 +190,15 @@ the applied steps section*
  column are -1 and 0, which we consider as garbage values as the 
  number of goods sold are as high as 40 and 53
  
- **_picture of 0 and -1, highlight amount and quantity_**
+![c9d5a0d3-91a8-4223-999b-30e0246d50d8](https://user-images.githubusercontent.com/80768666/145199507-c2510ac6-71d2-46ef-89c6-1f34bdc455d6.jpg)
+
 
   So we deselect all the 0 and -1 values
+  
+![f307412f-f7b8-4df3-acc4-fc53aef3859c](https://user-images.githubusercontent.com/80768666/145199599-a034b815-323f-47bd-886d-adac12d32535.jpg)
 
-**_picture of deselecting rows with 0 and -1_**
 
-**_final picture_**
+![aa6f123c-46f8-4252-875b-8ee698429096](https://user-images.githubusercontent.com/80768666/145199626-2c8273f8-a82e-40f7-8bd9-ab07312d6546.jpg)
 
 #### Query generated:
     Table.SelectRows(sales_transactions, each ([sales_amount] = -1 or [sales_amount] = 0))
@@ -197,16 +206,18 @@ the applied steps section*
 3. Sales Transactions (USD to INR): There will be  times where we'll need to calculate the sum of the total revenue. 
  That can not be done directly as the USD values are different from the INR values. 
 
-
- **_currency in USD screenshot_**
+![d8be703a-104a-4971-8213-626bee2fbbf9](https://user-images.githubusercontent.com/80768666/145199672-86ab6cc6-72fc-4930-9b54-b81c6d9382a5.jpg)
 
  In order to fix this, we create a new column called the *normalized currency*,
  which will consist of all the values in INR. This will be a conditional column by using the if-else condition, 
  such that if the currency is USD, the corresponding
   sales value is  1, otherwise 0.
+  
+![7f51c64e-16bb-4243-a93c-83ed459a1756](https://user-images.githubusercontent.com/80768666/145199716-73e06fc2-ed20-49c4-8089-e5fb532ff8e6.jpg)
 
-**_creation of new conditional column_**
-**_screenshot of newly generated column_**
+![9ea4f4cf-e414-4b06-8356-bae4d549be1a](https://user-images.githubusercontent.com/80768666/145202272-2632d5dc-e689-4c01-8fcf-f2f563d03967.jpg)
+
+
 
 #### Query generated: 
     Table.AddColumn(#Removed Columns1", "Custom", each if [currency] = "USD" then 1 else 0)
@@ -223,12 +234,15 @@ column by making the required changes in the query. Since our
 Here, if the currency is USD, the value of the sales amount is converted value of INR and is added to the normalised_currency column but if the currency 
 value is in INR itself, it is directly added to normalised_currency.
 
-**_picture of original query_**
-**_picture of highlighted changes in query_**
+![7ea0153a-f92f-4b91-a5cb-f681a3125c7b](https://user-images.githubusercontent.com/80768666/145202665-f4333e3c-2a06-40ac-87a1-7aa91ccb5084.jpg)
+
+![bc623b1e-2fdd-44b1-bb81-3b5a5b4407a5](https://user-images.githubusercontent.com/80768666/145202686-12e68811-d56d-4edd-a8e9-c68391a99326.jpg)
+
 
 Now we have a normalized currency column where all the values are in INR
 
-**_new column photo_**
+![b76ad356-bd37-4aea-8d23-7bc5c0c1fe78](https://user-images.githubusercontent.com/80768666/145202727-e3e160b6-63ee-4e7b-8921-650ac6344417.jpg)
+
 
 **With this, we complete ETL**
 
@@ -237,19 +251,20 @@ A data model is a way of establishing relationships between the various fields
 in the provided data. As mentioned before, PowerBI generates default data models
 but also gives us the liberty to make changes of our own. 
 
-**_picture of default relationship_**
+![aa314583-39bf-4948-b715-7732f6158846](https://user-images.githubusercontent.com/80768666/145202765-e4499a01-3a8f-4fc3-b509-316b754e041b.jpg)
+
 
 Here, it has established a default relationship between the customers, transactions, and products. In addition to this, we create a relationship between date and markets 
 as well. 
 
-**_picture of establishing relationship_**
+![86f70372-3fa8-4f36-a182-ce4b421b1c11](https://user-images.githubusercontent.com/80768666/145202805-f320f77e-1ce0-4e73-a878-9c33615574b7.jpg)
+
+![48df467d-faa7-4b8b-9041-ecad050f6b24](https://user-images.githubusercontent.com/80768666/145202902-09d92d62-fecc-4598-a5ab-ea8537727520.jpg)
 
 
 *Most of the time, the reason PowerBI is not able to establish a few obvious relationships
 is because of the minor difference in data labels. This is an issue that has to be
 reported to and handled by the IT department.*
-
-**_final established relationship_**
 
 # The Dashboard / Report
 Based on the stakeholder requirements, we build the necessary visualizations
