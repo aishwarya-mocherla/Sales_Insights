@@ -1,6 +1,6 @@
 
 # **Sales Insights Using PowerBI**
-# **This is bold text**
+
 # About the project
 I wanted to work on a project that would take me through the entire workflow of a real-time
  data analysis life cycle. I have tried my best to include every 
