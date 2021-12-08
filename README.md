@@ -1,5 +1,7 @@
 <h1 align="center" style="font-size:20vw; font-weight: bold;">Sales Insights Using PowerBI</h1>
 
+
+
 # About the project
 I wanted to work on a project that would take me through the entire workflow of a real-time
  data analysis life cycle. I have tried my best to include every 
